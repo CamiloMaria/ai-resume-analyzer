@@ -15,3 +15,9 @@ export function formatSize(bytes: number, decimals: number = 2): string {
 
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
 }
+
+/**
+ * Generates a random UUID
+ * @returns A random UUID
+ */
+export const generateUUID = () => crypto.randomUUID();
