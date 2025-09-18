@@ -87,7 +87,7 @@ const resume = () => {
                     {feedback ? (
                         <div className="flex flex-col gap-8 animate-in fade-in duration-1000">
                             <Summary feedback={feedback} />
-                            <ATS />
+                            <ATS score={feedback.ATS.score} suggestions={feedback.ATS.tips} />
                             <Details />
                         </div>
                     ) : (
