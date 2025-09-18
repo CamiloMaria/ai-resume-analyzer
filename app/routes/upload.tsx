@@ -81,7 +81,7 @@ const upload = () => {
         await kv.set(`resume_${uuid}`, JSON.stringify(data))
 
         setStatusText("Resume analyzed successfully")
-        // navigate(`/resume/${uuid}`)
+        navigate(`/resume/${uuid}`)
     }
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
