@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import { usePuterStore } from "~/lib/puter";
 
 const WipeApp = () => {
-    const { auth, isLoading, error, clearError, fs, ai, kv } = usePuterStore();
-    const navigate = useNavigate();
+    const { error, fs, kv } = usePuterStore();
     const [files, setFiles] = useState<FSItem[]>([]);
 
     const loadFiles = async () => {
@@ -16,12 +14,6 @@ const WipeApp = () => {
         loadFiles();
     }, []);
 
-    useEffect(() => {
-        if (!isLoading && !auth.isAuthenticated) {
-            navigate("/auth?next=/wipe");
-        }
-    }, [isLoading]);
-
     const handleDelete = async () => {
         files.forEach(async (file) => {
             await fs.delete(file.path);
@@ -30,17 +22,12 @@ const WipeApp = () => {
         loadFiles();
     };
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
     if (error) {
         return <div>Error {error}</div>;
     }
 
     return (
         <div>
-            Authenticated as: {auth.user?.username}
             <div>Existing files:</div>
             <div className="flex flex-col gap-4">
                 {files.map((file) => (
